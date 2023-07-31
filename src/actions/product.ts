@@ -13,6 +13,18 @@ export const getProducts = createAsyncThunk(
     }
 );
 
+export const getOneProduct = createAsyncThunk(
+    "product/getOneProduct",
+    async (id: number) => {
+        try {
+            const { data } = await axios.get(`http://localhost:3000/products/${id}`);
+            return data;
+        } catch (error: any) {
+            return error.message;
+        }
+    }
+)
+
 export const addProduct = createAsyncThunk(
     'product/addProduct',
     async (product) => {
