@@ -1,17 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 type Props = {};
 
 const Header = (props: Props) => {
   return (
-    <header className="bg-white">
+    <header className="bg-white border-b-[1px]">
       <div className="container mx-auto px-6 py-3">
         <div className="flex items-center justify-between">
-          <div className="hidden w-full text-gray-600 md:flex md:items-center">
-            <span className="mx-1 text-sm">NY</span>
-          </div>
           <div className="w-full text-gray-700 md:text-center text-2xl font-semibold">
-            Brand
+            <Link to="/">
+              <img
+                src="https://nerman.com.vn/wp-content/uploads/2021/09/logo-header.svg"
+                alt=""
+                width={200}
+              />
+            </Link>
           </div>
           <div className="flex items-center justify-end w-full">
             <button className="text-gray-600 focus:outline-none mx-4 sm:mx-0">

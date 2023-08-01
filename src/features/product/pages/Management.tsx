@@ -15,7 +15,6 @@ const ProductManagementPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const dispatch = useAppDispatch();
   const { products } = useAppSelector((state) => state.product);
-  console.log(products);
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -25,7 +24,7 @@ const ProductManagementPage = () => {
   };
 
   const data = products
-    .filter((product) =>
+    ?.filter((product) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .map((item) => {
@@ -33,7 +32,7 @@ const ProductManagementPage = () => {
         key: item.id,
         name: item.name,
         price: item.price,
-        image: <Image width={50} src={item?.images[0]} />,
+        image: <Image width={50} src={item?.images?.[0]} />,
       };
     });
 
@@ -60,12 +59,16 @@ const ProductManagementPage = () => {
       render: (record) => (
         <Space size="middle">
           <Button type="primary" style={{ backgroundColor: "#9058cc" }}>
-            <Link to={`/admin/products/${record.key}/update`}>Edit</Link>
+            <Link to={`/admin/products/${record.key}`}>Edit</Link>
           </Button>
           <Button
             type="primary"
             danger
-            onClick={() => removeProduct(record.key)}
+            onClick={() => {
+              confirm("Are you sure to delete this product?")
+                ? removeProduct(record.key)
+                : null;
+            }}
           >
             Remove
           </Button>

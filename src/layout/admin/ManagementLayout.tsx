@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  LaptopOutlined,
-  NotificationOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Layout, Menu } from "antd";
 import { Link, Outlet } from "react-router-dom";
-import { AiFillCaretRight, AiFillHome, AiFillShopping } from "react-icons/ai";
+import { AiFillHome, AiFillShopping } from "react-icons/ai";
 const { Content, Sider } = Layout;
 
 const items: MenuProps["items"] = [
@@ -20,11 +15,6 @@ const items: MenuProps["items"] = [
     label: <Link to="/admin/products">All Products</Link>,
     key: "alipay",
     icon: <AiFillShopping />,
-  },
-  {
-    label: <Link to="/admin/categories">All Categories</Link>,
-    key: "categories",
-    icon: <AiFillCaretRight />,
   },
 ];
 

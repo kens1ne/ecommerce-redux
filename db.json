@@ -1,5 +1,42 @@
 {
-  "products": [],
+  "products": [
+    {
+      "id": 1,
+      "name": "versace",
+      "price": 10000,
+      "description": "csacsacasc",
+      "images": [
+        "https://i.ibb.co/yhXSvXr/unnamed.jpg"
+      ]
+    },
+    {
+      "name": "versace",
+      "price": 10000,
+      "description": "csacsacasc",
+      "images": [
+        "https://i.ibb.co/yhXSvXr/unnamed.jpg"
+      ],
+      "id": 2
+    },
+    {
+      "name": "versace",
+      "price": 10000,
+      "description": "csacsacasc",
+      "images": [
+        "https://i.ibb.co/yhXSvXr/unnamed.jpg"
+      ],
+      "id": 3
+    },
+    {
+      "id": 4,
+      "name": "Nguyen Duy Tan1",
+      "price": 122222,
+      "description": "3213123",
+      "images": [
+        "https://i.ibb.co/cbmH6zx/404.jpg"
+      ]
+    }
+  ],
   "users": [
     {
       "email": "olivier@mail.com",

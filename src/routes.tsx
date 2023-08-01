@@ -5,6 +5,8 @@ import Home from "./features/product/pages/Home";
 import ManagementLayout from "./layout/admin/ManagementLayout";
 import ProductManagementPage from "./features/product/pages/Management";
 import AddProduct from "./features/product/pages/Add";
+import EditProductPage from "./features/product/pages/Edit";
+import ProductDetailPage from "./features/product/pages/Detail";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +22,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "/product/:id",
+        element: <ProductDetailPage />,
       },
     ],
   },
@@ -45,7 +51,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "products/:id",
-        element: <div>Product Detail</div>,
+        element: <EditProductPage />,
       },
     ],
   },

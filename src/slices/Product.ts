@@ -1,14 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addProduct, deleteProduct, getProducts, updateProduct } from '../actions/product';
+import { addProduct, deleteProduct, getProductById, getProducts, updateProduct } from '../actions/product';
 
 const initialState = {
     products: [],
     isLoading: false,
-    error: ""
+    error: "",
+    product: {}
 } as {
-    products: any[],
-    isLoading: boolean,
-    error: string | null
+    products?: any[],
+    isLoading?: boolean,
+    error?: string | null,
+    product?: any
 }
 
 const productSlice = createSlice({
@@ -27,6 +29,9 @@ const productSlice = createSlice({
         builder.addCase(getProducts.rejected, (state: any, action) => {
             state.isLoading = false
             state.error = action.payload
+        });
+        builder.addCase(getProductById.fulfilled, (state: any, action) => {
+            state.product = action.payload
         });
         // adding
         builder.addCase(addProduct.fulfilled, (state: any, action) => {
