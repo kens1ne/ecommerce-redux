@@ -14,24 +14,25 @@ import {
 import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
 import Dragger from "antd/es/upload/Dragger";
-import { useAppDispatch } from "../../../../app/hook";
 import { addProduct } from "../../../../actions/product";
 import { useNavigate } from "react-router-dom";
+import { useAddProductMutation } from "../../../../api/product";
 
 type Props = {};
 
 const AddProduct = (props: Props) => {
   const navigate = useNavigate();
   const [images, setImages] = useState<string[]>([]);
-  const dispatch = useAppDispatch();
+  const [addProduct] = useAddProductMutation();
 
   const onFinish = async (values: any) => {
     const product = { ...values, images };
-    const result = await dispatch(addProduct(product));
-    if (addProduct.fulfilled.match(result)) {
-      message.success("Thêm sản phẩm thành công!");
-      navigate("/admin/products");
-    }
+    addProduct(product)
+      .unwrap()
+      .then(() => {
+        message.success("Thêm sản phẩm thành công!");
+        navigate("/admin/products");
+      });
   };
 
   const propsUploadImage: UploadProps = {

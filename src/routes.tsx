@@ -7,6 +7,7 @@ import ProductManagementPage from "./features/product/pages/Management";
 import AddProduct from "./features/product/pages/Add";
 import EditProductPage from "./features/product/pages/Edit";
 import ProductDetailPage from "./features/product/pages/Detail";
+import CartPage from "./features/cart/cart";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <ProductDetailPage />,
+      },
+      {
+        path: "/cart",
+        element: <CartPage />,
       },
     ],
   },

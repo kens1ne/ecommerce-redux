@@ -2,17 +2,14 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hook";
 import { getProducts } from "../../../actions/product";
 import { Link } from "react-router-dom";
+import { useGetAllProductsQuery } from "../../../api/product";
 
 type Props = {};
 
 const Home = (props: Props) => {
   const dispatch = useAppDispatch();
 
-  const { products } = useAppSelector((state) => state.product);
-
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+  const { data: products } = useGetAllProductsQuery();
 
   return (
     <div className="container mx-auto px-6 mb-10">

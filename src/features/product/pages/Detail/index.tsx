@@ -2,17 +2,14 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../app/hook";
 import { getProductById } from "../../../../actions/product";
+import { useGetOneProductQuery } from "../../../../api/product";
 
 type Props = {};
 
 const ProductDetailPage = (props: Props) => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
-  const { product } = useAppSelector((state) => state.product);
-
-  useEffect(() => {
-    dispatch(getProductById(Number(id)));
-  }, [dispatch]);
+  const { data: product } = useGetOneProductQuery(Number(id));
 
   const addToCart = (product: any) => {
     console.log("123");

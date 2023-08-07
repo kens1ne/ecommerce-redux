@@ -14,8 +14,12 @@ import {
 import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
 import { Image } from "antd";
 import Dragger from "antd/es/upload/Dragger";
-import { useAppDispatch, useAppSelector } from "../../../../app/hook";
-import { getProductById, updateProduct } from "../../../../actions/product";
+import { useAppDispatch } from "../../../../app/hook";
+import { updateProduct } from "../../../../actions/product";
+import {
+  useGetOneProductQuery,
+  useUpdateProductMutation,
+} from "../../../../api/product";
 
 const { TextArea } = Input;
 
@@ -23,29 +27,24 @@ const EditProductPage = () => {
   const [images, setImages] = useState<string[]>([]);
   const { id } = useParams(); // lấy id từ url
   const [form] = Form.useForm();
-  const { product: currentProduct } = useAppSelector((state) => state.product);
   const Navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isUpload, setIsUpload] = useState<boolean>(false);
 
-  useEffect(() => {
-    dispatch(getProductById(Number(id)));
-  }, [dispatch]);
+  const { data: currentProduct } = useGetOneProductQuery(Number(id));
 
+  const [updateProduct] = useUpdateProductMutation();
   const onFinish = async (data: any) => {
-    let result;
+    let product;
     if (isUpload) {
-      result = await dispatch(updateProduct({ id, ...data, images: images }));
+      product = { id, ...data, images: images };
     } else {
-      result = await dispatch(
-        updateProduct({ id, ...currentProduct, ...data })
-      );
+      product = { id, ...currentProduct, ...data };
     }
-    console.log({ id, ...data, images: images });
-    if (updateProduct.fulfilled.match(result)) {
+    updateProduct(product).then(() => {
       message.success("Sửa sản phẩm thành công!");
       Navigate("/admin/products");
-    }
+    });
   };
 
   useEffect(() => {
@@ -53,7 +52,6 @@ const EditProductPage = () => {
       name: currentProduct?.name,
       price: currentProduct?.price,
       description: currentProduct?.description,
-      categoryId: currentProduct?.categoryId,
     });
   }, [currentProduct]);
 

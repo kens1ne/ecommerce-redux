@@ -4,6 +4,7 @@ import type { ColumnsType } from "antd/es/table";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hook";
 import { deleteProduct, getProducts } from "../../../actions/product";
+import { useGetAllProductsQuery } from "../../../api/product";
 
 interface DataType {
   key: string;
@@ -14,13 +15,11 @@ interface DataType {
 const ProductManagementPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const dispatch = useAppDispatch();
-  const { products } = useAppSelector((state) => state.product);
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+
+  const { data: products } = useGetAllProductsQuery();
 
   const removeProduct = (id: number) => {
-    dispatch(deleteProduct(id));
+    console.log(123);
   };
 
   const data = products
